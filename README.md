@@ -19,7 +19,7 @@ innodb_ibd.py : 用来提取JSON中的表结构和索引信息
 
 ```shell
 [root@cluster-node2 opt]# sh ibd_json.sh
-请输入路径，示例：/data/app:  /opt  #存放ibd文件的目录，解析后后会生成一个当前日期的文件夹，以ibd_json命名
+请输入路径，示例：/data/app:  /opt  #存放ibd文件的目录，解析后会生成一个文件夹，以ibd_json命名
 
 [root@cluster-node2 opt]# ll
 drwxr-xr-x  2 root root       4096 Apr 27 16:48 ibd_json
