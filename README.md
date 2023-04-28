@@ -13,7 +13,7 @@ DDL: 生成建表语句(无法区分唯一索引)
 ibd_json.sh ：用来解析解析ibd文件，生成sdi的JSON信息  \
 innodb_ibd.py : 用来提取JSON中的表结构和索引信息
 
-示例：
+示例： \
 1、
 先执行ibd_json.sh，解析ibd的SDI信息并生成JSON文件
 
