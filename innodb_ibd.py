@@ -30,7 +30,7 @@ class innodb_ibd():
             data_ddl = data[1]
             data_engine = data[2]
             engine = data_engine.get('object').get('dd_object').get('engine')
-            comment = data_engine.get('object').get('dd_object').get('comment')
+            comment = data_ddl.get('object').get('dd_object').get('comment')
             table_name = data_ddl.get('object').get('dd_object').get('name')
             cols = ''
             hn = "'"
@@ -39,7 +39,7 @@ class innodb_ibd():
             ddl = f"CREATE TABLE {table_name}"
             cols = ''
             for column in data_ddl['object']['dd_object']['columns']:
-                if column['name'] in ['DB_TRX_ID', 'DB_ROLL_PTR', 'DB_ROW_ID','FTS_DOC_ID']:
+                if column['name'] in ['DB_TRX_ID', 'DB_ROLL_PTR', 'DB_ROW_ID', 'FTS_DOC_ID']:
                     continue
                 else:
                     column_list.append(column['name'])
@@ -76,12 +76,12 @@ class innodb_ibd():
                         foreign_key_list.append(fidx_name)
 
             indexl2 = list(np.unique(indexl))
-            foreign_key_list2=list(np.unique(foreign_key_list))
+            foreign_key_list2 = list(np.unique(foreign_key_list))
             index = ",".join([x for x in indexl2])
             foreign_index = ",".join([x for x in foreign_key_list2])
             col_index = f"{cols}\n{index}" if len(index) > 0 else f"{cols[:-1]}"
-            dh=','
-            ddl = f"{ddl}({col_index}{dh+foreign_index if foreign_name else ''}) ENGINE={engine} {' COMMENT ' + hn + comment + hn if comment else ''};".strip()
+            dh = ','
+            ddl = f"{ddl}({col_index}{dh + foreign_index if foreign_name else ''}) ENGINE={engine} {' COMMENT ' + hn + comment + hn if comment else ''};".strip()
             ddl_res = re.sub(' +', ' ', ddl)
 
             now = datetime.now()  # 获得当前时间
